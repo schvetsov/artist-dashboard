@@ -3,7 +3,9 @@ import '../App.css';
 
 class BigCard extends Component {
 
-  //This method calculates age of the artist
+  //This is the large detail view for the selected artist
+
+  //This method calculates the age of the artist
   getAge() {
     let today = new Date().getFullYear();
     console.log(today)

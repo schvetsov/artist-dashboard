@@ -3,6 +3,8 @@ import '../App.css';
 
 class SmallCard extends Component {
 
+  //This is the clickable container for each item of the list
+  
   render() {
     return (
       <div className="smallCard" onClick={() => this.props.handleChange(this.props.artist.artistID)}>
