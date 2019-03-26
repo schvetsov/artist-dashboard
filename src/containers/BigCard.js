@@ -12,12 +12,12 @@ class BigCard extends Component {
     //Get birth date
     let birthdate = this.props.selection.dateOfBirth;
     //Split date string into array
-    let res = birthdate.split(" ");
+    let arr = birthdate.split(" ");
     //Create object out of array for easier handling
     const birth = {
-      year: res[2],
-      month: res[1],
-      day: res[0]
+      year: arr[2],
+      month: arr[1],
+      day: arr[0]
     }
     //Convert the month into number, months are (0-11)
     switch(birth.month) {

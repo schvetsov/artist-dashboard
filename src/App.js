@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.handleChange = this.handleChange.bind(this)
   }
-
+ 
   //Dispatch the list of actors to Redux
   updateList = (value) => {
     this.props.dispatch({ type: "LIST", value: value })
