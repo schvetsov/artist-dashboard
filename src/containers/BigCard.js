@@ -3,7 +3,7 @@ import '../App.css';
 
 class BigCard extends Component {
 
-  //This is the large detail view for the selected artist
+  //This is the large detailed view for the selected artist
 
   //This method calculates the age of the artist
   getAge() {
