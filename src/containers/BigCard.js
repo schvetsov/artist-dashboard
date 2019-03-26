@@ -89,4 +89,4 @@ class BigCard extends Component {
   }
 }
 
-export default BigCard;
+export default BigCard; 
