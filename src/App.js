@@ -38,7 +38,7 @@ class App extends Component {
   handleChange(value) {
     let route = 'https://fb-assessment.glitch.me/artists/' + value;
     axios.get(route)
-    .then(res => { console.log(res.data)
+    .then(res => {
       //Response is sent to be dispatched to Redux
       this.updateProfile(res.data)
     })

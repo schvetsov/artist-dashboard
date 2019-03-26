@@ -7,13 +7,66 @@ class BigCard extends Component {
 
   //This method calculates the age of the artist
   getAge() {
-    let today = new Date().getFullYear();
-    console.log(today)
-    let birthdate = this.props.selection.dateOfBirth || '2000';
-    let year = birthdate.slice(-5);
-    console.log(year)
-    let age = today - year;
-    console.log(age)
+    //Get todays date object
+    let todaysDate = new Date();
+    //Get birth date
+    let birthdate = this.props.selection.dateOfBirth;
+    //Split date string into array
+    let res = birthdate.split(" ");
+    //Create object out of array for easier handling
+    const birth = {
+      year: res[2],
+      month: res[1],
+      day: res[0]
+    }
+    //Convert the month into number, months are (0-11)
+    switch(birth.month) {
+      case 'January':
+        birth.month = 0;
+        break;
+      case 'February':
+        birth.month = 1;
+        break;
+      case 'March':
+        birth.month = 2;
+        break;
+      case 'April':
+        birth.month = 3;
+        break;
+      case 'May':
+        birth.month = 4;
+        break;
+      case 'June':
+        birth.month = 5;
+        break;
+      case 'July':
+        birth.month = 6;
+        break;
+      case 'August':
+        birth.month = 7;
+        break;
+      case 'September':
+        birth.month = 8;
+        break;
+      case 'October':
+        birth.month = 9;
+        break;
+      case 'November':
+        birth.month = 10;
+        break;
+      case 'December':
+        birth.month = 11;
+        break;
+      default:
+        birth.month = 0;
+    }
+    //Create birthdate object
+    let birthDate = new Date(birth.year, birth.month, birth.day);
+    //testing
+    console.log("Today's Date: " + todaysDate);
+    console.log("Birth Date: " + birthDate);
+    //Get number of years between dates
+    let age = String(Math.floor((todaysDate - birthDate)/(1000*60*60*24*365)));
     return age;
   }
 
