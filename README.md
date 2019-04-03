@@ -5,6 +5,7 @@
 3. npm install
 4. npm start
 5. Click artist image to load details
+6. 
 
 ## What you should see
 
