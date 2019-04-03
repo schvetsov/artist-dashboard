@@ -1,5 +1,32 @@
 import React, { Component } from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+const styles = {
+  card: {
+    // maxWidth: 345,
+    height: '100vh',
+    // marginTop: 10,
+    // marginBottom: 10,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  media: {
+    height: '70%',
+    width: '65vw'
+    // height: 400,
+    // width: 400
+  },
+};
 
 class BigCard extends Component {
 
@@ -71,22 +98,54 @@ class BigCard extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="bigCard" onClick={this.handleChange}>
-        {this.props.selection.firstName ?
-            <div>
-                <div className="bigCard-name">{this.props.selection.firstName} {this.props.selection.lastName}</div>
-                <div><img className="image-big" src={this.props.selection.imageURL} alt="" /></div>
-                <div className="profession">{this.props.selection.art}</div>
-                <div>{this.props.selection.dateOfBirth} (age {this.getAge()})</div>
-                <div>Born in {this.props.selection.placeOfBirth}</div>
-            </div>
-        : 
-            <div>Server error, please try again or refresh the page.</div>
-        }
+      <div>
+      {this.props.selection.firstName ? 
+        <Card className={classes.card}>
+          <CardHeader
+            title={this.props.selection.firstName + " " + this.props.selection.lastName}
+            subheader={this.props.selection.art}
+          />
+          <CardMedia
+            className={classes.media}
+            image={this.props.selection.imageURL}
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography component="p">
+              {this.props.selection.dateOfBirth} (Age: {this.props.selection.firstName && this.getAge()})
+            </Typography>
+            <Typography component="p">
+              Born in {this.props.selection.placeOfBirth}
+            </Typography>
+          </CardContent>
+      </Card>
+      :
+        <div></div>
+      }
       </div>
+      // <div className="bigCard" onClick={this.handleChange}>
+      //   {this.props.selection.firstName ?
+      //       <div>
+      //           <div className="bigCard-name">{this.props.selection.firstName} {this.props.selection.lastName}</div>
+      //           <div><img className="image-big" src={this.props.selection.imageURL} alt="" /></div>
+      //           <div className="profession">{this.props.selection.art}</div>
+      //           <div>{this.props.selection.dateOfBirth} (age {this.getAge()})</div>
+      //           <div>Born in {this.props.selection.placeOfBirth}</div>
+      //       </div>
+      //   : 
+      //       <div>Server error, please try again or refresh the page.</div>
+      //   }
+      // </div>
     );
   }
 }
 
-export default BigCard; 
+BigCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(BigCard);
+
+// export default BigCard; 
