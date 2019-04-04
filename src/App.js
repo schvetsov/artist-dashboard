@@ -83,28 +83,28 @@ class App extends Component {
   //   />
   // )
     const { classes } = this.props;
-    // const items = this.props.data.map((_,i) => (
-    //   <GridListTile key={i}>
-    //     <img src={this.props.data[i].imageURL} alt={""} />
-    //     <GridListTileBar
-    //       title={this.props.data[i].firstName}
-    //       subtitle={<span>by: {this.props.data[i].art}</span>}
-    //       actionIcon={
-    //         <IconButton className={styles.icon}>
-    //           <InfoIcon />
-    //         </IconButton>
-    //       }
-    //     />
-    //   </GridListTile>
-    // ))
+    const items = this.props.data.map((_,i) => (
+      <GridListTile key={i} onClick={() => this.handleChange(this.props.data[i].artistID)}>
+        <img src={this.props.data[i].imageURL} alt={""} />
+        <GridListTileBar
+          title={this.props.data[i].firstName + " " + this.props.data[i].lastName} 
+          subtitle={this.props.data[i].art}
+          actionIcon={
+            <IconButton className={classes.icon}>
+              <InfoIcon />
+            </IconButton>
+          }
+        />
+      </GridListTile>
+    ))
     return (
       <div style={{display:'flex'}}>
         <div className={classes.root}>
           <GridList cellHeight={160} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-              <ListSubheader component="div">Artists</ListSubheader>
+              {/* <ListSubheader component="div">Artists</ListSubheader> */}
             </GridListTile>
-            {this.props.data.map((_,i) => (
+            {/* {this.props.data.map((_,i) => (
               <GridListTile key={i} onClick={() => this.handleChange(this.props.data[i].artistID)}>
                 <img src={this.props.data[i].imageURL} alt={""} />
                 <GridListTileBar
@@ -117,7 +117,8 @@ class App extends Component {
                   }
                 />
               </GridListTile>
-            ))}
+            ))} */}
+            {items}
           </GridList>
         </div>
         <div>
