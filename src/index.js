@@ -4,28 +4,29 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
 import { createStore } from 'redux';
+import reducer from './reducer';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const initialState = {
-    data: [],
-    selection: ''
-};
+// const initialState = {
+//     data: [],
+//     selection: ''
+// };
 
-function reducer(state = initialState, action) {
-    switch(action.type) {
-        case "LIST":
-            return Object.assign({}, state, {
-                data: action.value
-            })
-        case "PROFILE":
-            return Object.assign({}, state, {
-                selection: action.value
-            })
-        default:
-            return state;
-    }
-}
+// function reducer(state = initialState, action) {
+//     switch(action.type) {
+//         case "LIST":
+//             return Object.assign({}, state, {
+//                 data: action.value
+//             })
+//         case "PROFILE":
+//             return Object.assign({}, state, {
+//                 selection: action.value
+//             })
+//         default:
+//             return state;
+//     }
+// }
 
 const store = createStore(reducer);
 
