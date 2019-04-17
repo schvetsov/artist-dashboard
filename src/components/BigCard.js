@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAge } from '../actions/getAge';
+import { getAge } from '../logic/getAge';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';

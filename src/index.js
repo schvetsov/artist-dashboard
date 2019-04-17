@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import App from './containers/App';
+import App from './components/App';
 import { createStore } from 'redux';
 import reducer from './reducers/reducer';
 import { Provider } from 'react-redux';
@@ -10,14 +10,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const store = createStore(reducer);
 
-const App2 = () => (
+const rootElement = document.getElementById('root');
+
+render(
     <Provider store={store}>
         <MuiThemeProvider>
             <App />
         </MuiThemeProvider>
-    </Provider>
+    </Provider>,
+    rootElement
 )
-
-ReactDOM.render(<App2 />, document.getElementById('root'));
 
 serviceWorker.unregister();
