@@ -8,9 +8,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case LIST:
-            return Object.assign({}, state, {
-                data: action.value
-            })
+            return {
+                data: action.value,
+                selection: ''
+            }
         case PROFILE:
             return Object.assign({}, state, {
                 selection: action.value

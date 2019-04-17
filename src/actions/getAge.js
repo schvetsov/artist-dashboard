@@ -49,8 +49,6 @@ export function getAge(passedProps) {
         birth.month = 0;
     }
     let birthDate = new Date(birth.year, birth.month, birth.day);
-    console.log("Today's Date: " + todaysDate);
-    console.log("Birth Date: " + birthDate);
     let age = String(Math.floor((todaysDate - birthDate)/(1000*60*60*24*365)));
     return age;
 }

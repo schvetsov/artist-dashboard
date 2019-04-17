@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -24,50 +24,42 @@ const styles = theme => ({
   },
 });
 
-class SmallCard extends Component {
-
-  render() {
-    const { classes } = this.props;
-    const data = this.props.data;
-    const items = this.props.data.map((_,i) => (
+const SmallCard = (props) => (
+  <div className={props.classes.root}>
+    <GridList 
+      cellHeight={160} 
+      className={props.classes.gridList}
+    >
       <GridListTile 
-        key={i} 
-        onClick={() => 
-          this.props.handleChange(data[i].artistID, this.props.props)}
+        key="Subheader" 
+        cols={2} 
+        style={{ height: 'auto' }}
       >
-        <img 
-          src={data[i].imageURL} 
-          alt={""} 
-        />
-        <GridListTileBar
-          title={data[i].firstName + " " + data[i].lastName} 
-          subtitle={data[i].art}
-          actionIcon={
-            <IconButton className={classes.icon}>
-              <InfoIcon />
-            </IconButton>
-          }
-        />
       </GridListTile>
-    ))
-    return (
-        <div className={classes.root}>
-          <GridList 
-            cellHeight={160} 
-            className={classes.gridList}
-          >
-            <GridListTile 
-              key="Subheader" 
-              cols={2} 
-              style={{ height: 'auto' }}
-            >
-            </GridListTile>
-            {items}
-          </GridList>
-        </div>
-    );
-  }
-}
+      {props.data.map((_,i) => (
+        <GridListTile 
+          key={i} 
+          onClick={() => 
+            props.handleChange(props.data[i].artistID, props.dispatch)}
+        >
+          <img 
+            src={props.data[i].imageURL} 
+            alt={""} 
+          />
+          <GridListTileBar
+            title={props.data[i].firstName + " " + props.data[i].lastName} 
+            subtitle={props.data[i].art}
+            actionIcon={
+              <IconButton className={props.classes.icon}>
+                <InfoIcon />
+              </IconButton>
+            }
+          />
+        </GridListTile>
+      ))}
+    </GridList>
+  </div>
+)
 
 SmallCard.propTypes = {
   classes: PropTypes.object.isRequired,

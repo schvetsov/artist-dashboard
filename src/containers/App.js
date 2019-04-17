@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SmallCard from '../components/SmallCard';
 import BigCard from '../components/BigCard';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { fetchList, handleChange } from '../actions/actions';
 
 class App extends Component {
@@ -14,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchList(this.props);
+    this.fetchList(this.props.dispatch);
   }
 
   render() {
@@ -22,9 +21,9 @@ class App extends Component {
     return (
       <div style={{display:'flex'}}>
         <SmallCard 
+          dispatch={this.props.dispatch}
           data={this.props.data}
           handleChange={this.handleChange}
-          props={this.props}
         />
         <BigCard 
           selection={this.props.selection} 
@@ -33,10 +32,6 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 const mapStateToProps = state => ({...state})
 

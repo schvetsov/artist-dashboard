@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getAge } from '../actions/getAge';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -20,39 +20,33 @@ const styles = {
   },
 };
 
-class BigCard extends Component {
-  render() {
-    const { classes } = this.props;
-    const item = this.props.selection;
-    return (
-      <div>
-      {item.firstName ? 
-        <Card className={classes.card}>
-          <CardHeader
-            title={item.firstName + " " + item.lastName}
-            subheader={item.art}
-          />
-          <CardMedia
-            className={classes.media}
-            image={item.imageURL}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography component="p">
-              {item.dateOfBirth} (Age: {item.firstName && getAge(this.props)})
-            </Typography>
-            <Typography component="p">
-              Born in {item.placeOfBirth}
-            </Typography>
-          </CardContent>
-      </Card>
-      :
-        <div></div>
-      }
-      </div>
-    );
-  }
-}
+const BigCard = (props) => (
+  <div>
+    {props.selection.firstName ? 
+      <Card className={props.classes.card}>
+        <CardHeader
+          title={props.selection.firstName + " " + props.selection.lastName}
+          subheader={props.selection.art}
+        />
+        <CardMedia
+          className={props.classes.media}
+          image={props.selection.imageURL}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography component="p">
+            {props.selection.dateOfBirth} (Age: {props.selection.firstName && getAge(props)})
+          </Typography>
+          <Typography component="p">
+            Born in {props.selection.placeOfBirth}
+          </Typography>
+        </CardContent>
+    </Card>
+    :
+      <div></div>
+    }
+  </div>
+)
 
 BigCard.propTypes = {
   classes: PropTypes.object.isRequired,

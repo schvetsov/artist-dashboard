@@ -17,18 +17,16 @@ export function updateProfile(value) {
     }
 };
 
-export function fetchList(passedProps) {
-    console.log(passedProps)
+export function fetchList(dispatch) {
     return axios.get('https://fb-assessment.glitch.me/artists')
-        .then(res => passedProps.dispatch(updateList(res.data)))
+        .then(res => dispatch(updateList(res.data)))
         .catch(err => console.log(err))
     
 }
 
-export function handleChange(value, passedProps) {
-    console.log(passedProps);
+export function handleChange(value, dispatch) {
     let route = 'https://fb-assessment.glitch.me/artists/' + value;
     return axios.get(route)
-        .then(res => passedProps.dispatch(updateProfile(res.data)))
+        .then(res => dispatch(updateProfile(res.data)))
         .catch(err => console.log(err))
 }
