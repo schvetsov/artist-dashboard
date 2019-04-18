@@ -10,10 +10,7 @@ const Card = (props) => (
         onClick={() => 
         props.handleChange(props.data.artistID, props.dispatch)}
     >
-        <img 
-            src={props.data.imageURL} 
-            alt={""} 
-        />
+        <img src={props.data.imageURL} alt={""} />
         <GridListTileBar
             title={props.data.firstName + " " + props.data.lastName} 
             subtitle={props.data.art}

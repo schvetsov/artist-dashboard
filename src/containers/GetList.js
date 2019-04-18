@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import List from '../components/List';
 import BigCard from '../components/BigCard';
 import { connect } from 'react-redux';
@@ -18,16 +18,16 @@ class GetList extends Component {
 
   render() {
     return (
-        <Fragment>
-            <List 
-                dispatch={this.props.dispatch}
-                data={this.props.data}
-                handleChange={this.handleChange}
-            />
-            <BigCard 
-                selection={this.props.selection} 
-            />
-        </Fragment>
+      <>
+        <List 
+            dispatch={this.props.dispatch}
+            data={this.props.data}
+            handleChange={this.handleChange}
+        />
+        <BigCard 
+            selection={this.props.selection} 
+        />
+      </>
     );
   }
 }

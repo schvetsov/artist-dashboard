@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAge } from '../logic/getAge';
+import { calcAge } from '../logic/calcAge';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -35,7 +35,7 @@ const BigCard = (props) => (
         />
         <CardContent>
           <Typography component="p">
-            {props.selection.dateOfBirth} (Age: {props.selection.firstName && getAge(props)})
+            {props.selection.dateOfBirth} (Age: {props.selection.firstName && calcAge(props)})
           </Typography>
           <Typography component="p">
             Born in {props.selection.placeOfBirth}
