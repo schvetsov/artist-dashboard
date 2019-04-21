@@ -8,7 +8,8 @@ const Card = (props) => (
     <GridListTile 
         {...props}
         onClick={() => 
-        props.handleChange(props.data.artistID, props.dispatch)}
+            props.handleChange(props.data.artistID, props.dispatch)
+        }
     >
         <img src={props.data.imageURL} alt={""} />
         <GridListTileBar

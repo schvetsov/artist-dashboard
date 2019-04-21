@@ -20,7 +20,7 @@ const styles = {
   },
 };
 
-const BigCard = (props) => (
+const Detail = (props) => (
   <div>
     {props.selection.firstName ? 
       <Card className={props.classes.card}>
@@ -48,8 +48,8 @@ const BigCard = (props) => (
   </div>
 )
 
-BigCard.propTypes = {
+Detail.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(BigCard);
+export default withStyles(styles)(Detail);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import List from '../components/List';
-import BigCard from '../components/BigCard';
+import Detail from '../components/Detail';
 import { connect } from 'react-redux';
 import { fetchList, handleChange } from '../logic/api';
 
@@ -19,13 +19,13 @@ class GetList extends Component {
   render() {
     return (
       <>
-        <List 
-            dispatch={this.props.dispatch}
-            data={this.props.data}
-            handleChange={this.handleChange}
+        <List
+          dispatch={this.props.dispatch}
+          data={this.props.data}
+          handleChange={this.handleChange}
         />
-        <BigCard 
-            selection={this.props.selection} 
+        <Detail 
+          selection={this.props.selection} 
         />
       </>
     );
