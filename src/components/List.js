@@ -1,8 +1,10 @@
 import React from 'react';
-import Card from './Card';
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
 import PropTypes from 'prop-types';
 
 const styles = theme => ({
@@ -35,13 +37,23 @@ const List = (props) => (
       >
       </GridListTile>
       {props.data.map((_,i) => 
-        <Card
+        <GridListTile 
           key={i}
-          handleChange={props.handleChange}
-          data={props.data[i]}
-          dispatch={props.dispatch}
-          classes={props.classes}
-        />
+          onClick={() => 
+            props.handleChange(props.data[i].artistID, props.dispatch)
+          }
+        >
+          <img src={props.data[i].imageURL} alt={""} />
+          <GridListTileBar
+            title={props.data[i].firstName + " " + props.data[i].lastName} 
+            subtitle={props.data[i].art}
+            actionIcon={
+              <IconButton className={props.classes.icon}>
+                <InfoIcon />
+              </IconButton>
+            }
+          />
+        </GridListTile>
       )}
     </GridList>
   </div>
