@@ -2,7 +2,7 @@ import reducer from './reducer';
 import * as types from '../actions/actions';
 
 describe('todos reducer', () => {
-    
+
     it('should return the initial state', () => {
         expect(reducer(undefined, {})).toEqual({
             data: [],
