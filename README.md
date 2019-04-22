@@ -28,7 +28,3 @@ which brings data into the detailed view.
 ## Bonus Requirements
 
 Unit and integration tests done with Jest and Enzyme.
-
-## ScreenShot
-
-![Screenshot](screenshot.png)

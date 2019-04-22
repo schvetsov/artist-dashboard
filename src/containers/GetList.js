@@ -4,7 +4,7 @@ import Detail from '../components/Detail';
 import { connect } from 'react-redux';
 import { fetchList, handleChange } from '../logic/api';
 
-class GetList extends Component {
+export class GetList extends Component {
 
   constructor(props) {
     super(props);

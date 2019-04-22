@@ -4,7 +4,7 @@ const fetchList = () => {
   return Promise.resolve({
     response: {
       results: range(10).map(i => ({
-        webUrl: `https://abc${i}.com`,
+        firstName: `https://abc${i}.com`,
         webTitle: `Some Title ${i}`
       }))
     }

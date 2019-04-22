@@ -26,36 +26,40 @@ const styles = theme => ({
 
 const List = (props) => (
   <div className={props.classes.root}>
-    <GridList 
-      cellHeight={160} 
-      className={props.classes.gridList}
-    >
-      <GridListTile 
-        key="Subheader" 
-        cols={2} 
-        style={{ height: 'auto' }}
-      >
-      </GridListTile>
-      {props.data.map((_,i) => 
-        <GridListTile 
-          key={i}
-          onClick={() => 
-            props.handleChange(props.data[i].artistID, props.dispatch)
-          }
+    {props.data ?
+        <GridList 
+          cellHeight={160} 
+          className={props.classes.gridList}
         >
-          <img src={props.data[i].imageURL} alt={""} />
-          <GridListTileBar
-            title={props.data[i].firstName + " " + props.data[i].lastName} 
-            subtitle={props.data[i].art}
-            actionIcon={
-              <IconButton className={props.classes.icon}>
-                <InfoIcon />
-              </IconButton>
-            }
-          />
-        </GridListTile>
-      )}
-    </GridList>
+          <GridListTile 
+            key="Subheader" 
+            cols={2} 
+            style={{ height: 'auto' }}
+          >
+          </GridListTile>
+          {props.data.map((_,i) => 
+            <GridListTile 
+              key={i}
+              onClick={() => 
+                props.handleChange(props.data[i].artistID, props.dispatch)
+              }
+            >
+              <img src={props.data[i].imageURL} alt={""} />
+              <GridListTileBar
+                title={props.data[i].firstName + " " + props.data[i].lastName} 
+                subtitle={props.data[i].art}
+                actionIcon={
+                  <IconButton className={props.classes.icon}>
+                    <InfoIcon />
+                  </IconButton>
+                }
+              />
+            </GridListTile>
+          )}
+        </GridList>
+    :
+      <div></div>
+    }
   </div>
 )
 
