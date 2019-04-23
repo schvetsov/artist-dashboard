@@ -2,7 +2,7 @@ import { LIST, PROFILE } from '../actions/actions';
 
 const initialState = {
     data: [],
-    selection: ''
+    selection: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
         case LIST:
             return {
                 data: action.value,
-                selection: ''
+                selection: {}
             }
         case PROFILE:
             return Object.assign({}, state, {

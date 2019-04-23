@@ -17,6 +17,7 @@ export class GetList extends Component {
   }
 
   render() {
+    console.log(Object.keys(this.props.selection).length)
     return (
       <>
         <List

@@ -22,26 +22,27 @@ const styles = {
 
 const Detail = (props) => (
   <div>
-    {props.selection.firstName ? 
-      <Card className={props.classes.card}>
-        <CardHeader
-          title={props.selection.firstName + " " + props.selection.lastName}
-          subheader={props.selection.art}
-        />
-        <CardMedia
-          className={props.classes.media}
-          image={props.selection.imageURL}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography component="p">
-            {props.selection.dateOfBirth} (Age: {props.selection.firstName && calcAge(props)})
-          </Typography>
-          <Typography component="p">
-            Born in {props.selection.placeOfBirth}
-          </Typography>
-        </CardContent>
-    </Card>
+    {Object.keys(props.selection).length !== 0 ? 
+      <Card>Hi</Card>
+      // <Card className={props.classes.card}>
+      //   <CardHeader
+      //     title={props.selection.firstName + " " + props.selection.lastName}
+      //     subheader={props.selection.art}
+      //   />
+      //   <CardMedia
+      //     className={props.classes.media}
+      //     image={props.selection.imageURL}
+      //     title="Contemplative Reptile"
+      //   />
+      //   <CardContent>
+      //     <Typography component="p">
+      //       {props.selection.dateOfBirth} (Age: {props.selection.firstName && calcAge(props)})
+      //     </Typography>
+      //     <Typography component="p">
+      //       Born in {props.selection.placeOfBirth}
+      //     </Typography>
+      //   </CardContent>
+      // </Card>
     :
       <div></div>
     }

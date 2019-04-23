@@ -6,7 +6,7 @@ describe('todos reducer', () => {
     it('should return the initial state', () => {
         expect(reducer(undefined, {})).toEqual({
             data: [],
-            selection: ''
+            selection: {}
         })
     })
 
@@ -18,7 +18,7 @@ describe('todos reducer', () => {
             })
         ).toEqual({
             data: [1, 2, 3],
-            selection: ''
+            selection: {}
         })
     })
 
