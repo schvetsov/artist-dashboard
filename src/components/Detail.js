@@ -21,9 +21,10 @@ const styles = {
 };
 
 const Detail = (props) => (
-  <div>
-    {Object.keys(props.selection).length !== 0 ? 
-      <Card>Hi</Card>
+  <Card>Hi</Card>
+  // <div>
+  //   {Object.keys(props.selection).length !== 0 ? 
+  //     <Card>Hi</Card>
       // <Card className={props.classes.card}>
       //   <CardHeader
       //     title={props.selection.firstName + " " + props.selection.lastName}
@@ -43,10 +44,10 @@ const Detail = (props) => (
       //     </Typography>
       //   </CardContent>
       // </Card>
-    :
-      <div></div>
-    }
-  </div>
+  //   :
+  //     <div></div>
+  //   }
+  // </div>
 )
 
 Detail.propTypes = {

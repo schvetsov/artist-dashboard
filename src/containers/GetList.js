@@ -3,6 +3,7 @@ import List from '../components/List';
 import Detail from '../components/Detail';
 import { connect } from 'react-redux';
 import { fetchList, handleChange } from '../logic/api';
+import Card from '@material-ui/core/Card';
 
 export class GetList extends Component {
 
@@ -17,7 +18,8 @@ export class GetList extends Component {
   }
 
   render() {
-    console.log(Object.keys(this.props.selection).length)
+    // console.log(Object.keys(this.props.selection).length)
+    // console.log(Card);
     return (
       <>
         <List
