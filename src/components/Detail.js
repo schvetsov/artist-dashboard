@@ -21,33 +21,31 @@ const styles = {
 };
 
 const Detail = (props) => (
-  <Card>Hi</Card>
-  // <div>
-  //   {Object.keys(props.selection).length !== 0 ? 
-  //     <Card>Hi</Card>
-      // <Card className={props.classes.card}>
-      //   <CardHeader
-      //     title={props.selection.firstName + " " + props.selection.lastName}
-      //     subheader={props.selection.art}
-      //   />
-      //   <CardMedia
-      //     className={props.classes.media}
-      //     image={props.selection.imageURL}
-      //     title="Contemplative Reptile"
-      //   />
-      //   <CardContent>
-      //     <Typography component="p">
-      //       {props.selection.dateOfBirth} (Age: {props.selection.firstName && calcAge(props)})
-      //     </Typography>
-      //     <Typography component="p">
-      //       Born in {props.selection.placeOfBirth}
-      //     </Typography>
-      //   </CardContent>
-      // </Card>
-  //   :
-  //     <div></div>
-  //   }
-  // </div>
+  <div>
+     {Object.keys(props.selection).length !== 0 ? 
+      <Card className={props.classes.card} data-test='this-card'>
+        <CardHeader
+          title={props.selection.firstName + " " + props.selection.lastName}
+          subheader={props.selection.art}
+        />
+        <CardMedia
+          className={props.classes.media}
+          image={props.selection.imageURL}
+          title="Contemplative Reptile"
+        />
+        <CardContent>
+          <Typography component="p">
+            {props.selection.dateOfBirth} (Age: {props.selection.firstName && calcAge(props)})
+          </Typography>
+          <Typography component="p">
+            Born in {props.selection.placeOfBirth}
+          </Typography>
+        </CardContent>
+      </Card>
+    :
+      <div></div>
+    }
+  </div>
 )
 
 Detail.propTypes = {

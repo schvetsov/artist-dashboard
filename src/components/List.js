@@ -26,24 +26,22 @@ const styles = theme => ({
 
 const List = (props) => (
   <div className={props.classes.root}>
-    {props.data ?
+    {Object.keys(props.data).length !== 0 ?
         <GridList 
           cellHeight={160} 
           className={props.classes.gridList}
-        >
+          data-test='this-list' >
           <GridListTile 
             key="Subheader" 
             cols={2} 
-            style={{ height: 'auto' }}
-          >
+            style={{ height: 'auto' }} >
           </GridListTile>
           {props.data.map((_,i) => 
             <GridListTile 
               key={i}
               onClick={() => 
                 props.handleChange(props.data[i].artistID, props.dispatch)
-              }
-            >
+              } >
               <img src={props.data[i].imageURL} alt={""} />
               <GridListTileBar
                 title={props.data[i].firstName + " " + props.data[i].lastName} 
@@ -52,8 +50,7 @@ const List = (props) => (
                   <IconButton className={props.classes.icon}>
                     <InfoIcon />
                   </IconButton>
-                }
-              />
+                } />
             </GridListTile>
           )}
         </GridList>

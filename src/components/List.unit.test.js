@@ -10,4 +10,17 @@ describe('<List />', () => {
         const wrapper = shallow(<List />);
         expect(wrapper.exists()).toBe(true);
     });
+    it('should not render <List> if selection is empty', () => {
+        const wrapper = shallow(<List />);
+        expect(wrapper.find("[data-test='this-list']")).toHaveLength(0);
+    });
+    it('should render <List> if selection isnt empty', () => {
+        const wrapper = shallow(<List />);
+        wrapper.setProps([{
+            data : {
+                entry: 'Test'
+            }
+        }])
+        expect(wrapper.find("[data-test='this-list']"));
+    });
 });

@@ -18,8 +18,7 @@ export class GetList extends Component {
   }
 
   render() {
-    // console.log(Object.keys(this.props.selection).length)
-    // console.log(Card);
+    console.log(this.props.data)
     return (
       <>
         <List
