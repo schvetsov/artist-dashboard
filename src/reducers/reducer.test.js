@@ -1,5 +1,5 @@
 import reducer from './reducer';
-import * as types from '../actions/actions';
+import * as types from '../actions';
 
 describe('todos reducer', () => {
 

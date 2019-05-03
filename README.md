@@ -1,7 +1,3 @@
-# Artist Dashboard
-
-By Stan Chvetsov
-
 ## Installation Instructions
 
 1. Navigate to [repo](https://github.com/schvetsov/ArtistDashboard)

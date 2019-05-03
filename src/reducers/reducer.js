@@ -1,4 +1,4 @@
-import { LIST, PROFILE } from '../actions/actions';
+import { LIST, PROFILE } from '../actions';
 
 const initialState = {
     data: [],

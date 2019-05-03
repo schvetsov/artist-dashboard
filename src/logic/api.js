@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { updateList, updateProfile } from '../actions/actions';
+import { updateList, updateProfile } from '../actions';
 
 export function fetchList(dispatch) {
     return axios.get('https://fb-assessment.glitch.me/artists')
