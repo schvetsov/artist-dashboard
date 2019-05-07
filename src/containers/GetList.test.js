@@ -6,23 +6,39 @@ import Detail from '../components/Detail';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import { fetchList, handleChange } from '../logic/api';
-import axios from 'axios';
+import { fakeServer } from 'sinon';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// jest.mock('axios');
-// jest.mock('fetchList', () => jest.fn())
+// const data = [
+//     {
+//         firstName: 'Bob',
+//         lastName: 'Jones',
+//         artistID: 123,
+//         imageURL: 'http://www.url.com'
+//     }
+// ]
+
+const props = {
+    data: [
+        {}
+    ],
+    selection: {}
+}
+
+const fetchList = jest.fn(() => {})
 
 describe('<GetList> no redux', () => {
+    const wrapper = shallow(<GetList />);
     it('renders', () => {
-        const wrapper = shallow(<GetList />);
-        // console.log(wrapper.debug());
         expect(wrapper.exists()).toBe(true);
-        expect(wrapper.find(fetchList));
-        expect(wrapper.find(handleChange));
-        expect(wrapper.find(List)).toHaveLength(1);
-        expect(wrapper.find(Detail)).toHaveLength(1);
+    });
+    it('renders List component', () => {
+        expect(wrapper.find(List).exists()).toBe(true);
+    });
+    it('renders Detail component', () => {
+        expect(wrapper.find(Detail).exists()).toBe(true);
+        console.log(wrapper.props());
     });
 });
 
@@ -39,17 +55,49 @@ describe('<GetList> with redux', () => {
         container = mount(<Provider store={store}><ConnectedGetList /></Provider>)
     })
     it('render connected component', () => {
-        console.log(container.debug());
-        expect(container).toHaveLength(1);
+        expect(container.exists()).toBe(true);
     })
-    // it('calls axios once', () => {
+    // it('should call fetchList when component mounts', () => {
+        // const spy = jest.spyOn(GetList.prototype, 'fetchList');
+        // container.instance().fetchList();
+        // expect(spy).toHaveBeenCalled();
         // expect(fetchList.mock.calls.length).toBe(1);
-        // const getSpy = jest.spyOn(axios, 'get');
-        // expect(getSpy).toBeCalled();
-    // })
-    // it('componentDidMount was called', () => {
-    //     const spy = jest.spyOn(ConnectedGetList.prototype, 'fetchList');
-    //     container.instance().fetchList();
-    //     expect(spy).toHaveBeenCalled();
     // })
 })
+
+describe('blah', () => {
+    it('calls fetchList', () => {
+        console.log(GetList.prototype.debug());
+        // const spy = jest.spyOn(GetList.prototype, 'fetchList');
+        // const wrapper = mount(<GetList {...props} />);
+        // wrapper.instance().fetchList();
+        // expect(spy).toHaveBeenCalled();
+    })
+})
+
+// describe('GetList', () => {
+//     let server;
+//     beforeEach(() => {
+//         server = fakeServer.create();
+//         server.respondWith(
+//             'GET',
+//             'https://fb-assessment.glitch.me/artists',
+//             [
+//                 200,
+//                 { 'Content-Type': 'application/json' },
+//                 JSON.stringify(data)
+//             ]
+//         );
+//     });
+//     describe('renders api', () => {
+//         let wrapper;
+//         beforeEach(done => {
+//             wrapper = mount(<GetList {...props} />);
+//             server.respond();
+//             setTimeout(done);
+//         });
+//         it('renders list', () => {
+//             // console.log(wrapper.debug());
+//         });
+//     });
+// });
