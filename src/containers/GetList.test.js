@@ -10,23 +10,22 @@ import { fakeServer } from 'sinon';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// const data = [
-//     {
-//         firstName: 'Bob',
-//         lastName: 'Jones',
-//         artistID: 123,
-//         imageURL: 'http://www.url.com'
-//     }
-// ]
+const data = [
+    {
+        firstName: 'Bob',
+        lastName: 'Jones',
+        artistID: 123,
+        imageURL: 'http://www.url.com'
+    }
+]
 
 const props = {
     data: [
         {}
     ],
-    selection: {}
+    selection: {},
+    fetchList: jest.fn(() => {})
 }
-
-const fetchList = jest.fn(() => {})
 
 describe('<GetList> no redux', () => {
     const wrapper = shallow(<GetList />);
@@ -38,11 +37,11 @@ describe('<GetList> no redux', () => {
     });
     it('renders Detail component', () => {
         expect(wrapper.find(Detail).exists()).toBe(true);
-        console.log(wrapper.props());
     });
 });
 
 describe('<GetList> with redux', () => {
+
     const initialState = {
         data: [],
         selection: ''
@@ -57,21 +56,14 @@ describe('<GetList> with redux', () => {
     it('render connected component', () => {
         expect(container.exists()).toBe(true);
     })
-    // it('should call fetchList when component mounts', () => {
-        // const spy = jest.spyOn(GetList.prototype, 'fetchList');
-        // container.instance().fetchList();
-        // expect(spy).toHaveBeenCalled();
-        // expect(fetchList.mock.calls.length).toBe(1);
-    // })
 })
 
-describe('blah', () => {
+describe('calls fetchList when component mounts', () => {
     it('calls fetchList', () => {
-        console.log(GetList.prototype.debug());
-        // const spy = jest.spyOn(GetList.prototype, 'fetchList');
-        // const wrapper = mount(<GetList {...props} />);
-        // wrapper.instance().fetchList();
-        // expect(spy).toHaveBeenCalled();
+        const spy = jest.spyOn(GetList.prototype, 'fetchList');
+        const wrapper = mount(<GetList {...props} />);
+        // console.log(wrapper.debug())
+        expect(spy).toHaveBeenCalled();
     })
 })
 
@@ -97,7 +89,7 @@ describe('blah', () => {
 //             setTimeout(done);
 //         });
 //         it('renders list', () => {
-//             // console.log(wrapper.debug());
+//             console.log(wrapper.debug());
 //         });
 //     });
 // });
