@@ -10,21 +10,34 @@ import { fakeServer } from 'sinon';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const data = [
-    {
+jest.mock('../__mocks__/handleChange')
+
+// const data = [
+//     {
+//         firstName: 'Bob',
+//         lastName: 'Jones',
+//         artistID: 123,
+//         imageURL: 'http://www.url.com'
+//     }
+// ]
+
+const selectedArtist = {
+    selection: {
         firstName: 'Bob',
         lastName: 'Jones',
-        artistID: 123,
-        imageURL: 'http://www.url.com'
+        art: 'Director',
+        imageURL: 'http://www.url.com',
+        dateOfBirth: '1/1/1999',
+        placeOfBirth: 'Jacksonville'
     }
-]
+}
 
 const props = {
     data: [
         {}
     ],
     selection: {},
-    fetchList: jest.fn(() => {})
+    dispatch: jest.fn(() => {})
 }
 
 describe('<GetList> no redux', () => {
@@ -62,8 +75,15 @@ describe('calls fetchList when component mounts', () => {
     it('calls fetchList', () => {
         const spy = jest.spyOn(GetList.prototype, 'fetchList');
         const wrapper = mount(<GetList {...props} />);
-        // console.log(wrapper.debug())
         expect(spy).toHaveBeenCalled();
+    })
+})
+
+describe('api call', () => {
+    it('works with promises', () => {
+        const wrapper = mount(<GetList {...props} />);
+        expect.assertions(1);
+        return wrapper.instance().handleChange().then(data => expect(data).toEqual(selectedArtist))
     })
 })
 

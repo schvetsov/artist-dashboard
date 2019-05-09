@@ -22,7 +22,7 @@ describe('<List />', () => {
         const wrapper = shallow(<List {...props} />);
         expect(wrapper.exists()).toBe(true);
     });
-    it('should not render <List> if selection is empty', () => {
+    it('should NOT render <List> if selection is empty', () => {
         const wrapper = mount(<List data={[]} />);
         expect(wrapper.find('GridList').exists()).toBe(false);
     });

@@ -4,7 +4,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import App from './components/App';
 import { createStore } from 'redux';
-import reducer from './reducers/reducer';
+import reducer from './reducers';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

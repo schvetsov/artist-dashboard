@@ -22,7 +22,6 @@ export class GetList extends Component {
       .then(res => dispatch(updateList(res.data)))
       .catch(err => console.log(err))
   }
-
   handleChange(value, dispatch) {
     let route = 'https://fb-assessment.glitch.me/artists/' + value;
     return axios.get(route)
