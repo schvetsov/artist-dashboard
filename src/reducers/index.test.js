@@ -32,5 +32,4 @@ describe('todos reducer', () => {
             selection: 'Testing'
         })
     })
-
 })
