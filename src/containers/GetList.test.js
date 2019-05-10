@@ -21,11 +21,11 @@ const selectedArtist = {
     }
 }
 
+const dispatch = jest.fn(() => {})
+
+
 describe('<GetList> no redux', () => {
 
-    mockAxios.get.mockImplementationOnce(() =>
-        Promise.resolve(selectedArtist)
-    );
     const wrapper = shallow(<GetList />);
 
     it('renders', () => {
@@ -37,18 +37,54 @@ describe('<GetList> no redux', () => {
     it('renders Detail component', () => {
         expect(wrapper.find(Detail).exists()).toBe(true);
     });
-    it('called api get in componentDidMount', () => {
-        expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    describe('called api get in componentDidMount', () => {
+        describe("good response", () => {
+
+            mockAxios.get.mockImplementationOnce(() => Promise.resolve(selectedArtist));
+            
+            it('called api', () => {
+                expect(mockAxios.get).toHaveBeenCalledTimes(2);
+            })
+            it('called api with correct url', () => {
+                expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists')
+            })
+        })
+        describe("bad response", () => {
+
+            mockAxios.get.mockImplementationOnce(() => Promise.reject());
+
+            it('called api', () => {
+                expect(mockAxios.get).toHaveBeenCalledTimes(2);
+            })
+            it('called api with correct url', () => {
+                expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists')
+            })
+        })
     })
-    it('called api with correct url', () => {
-        expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists')
-    })
-    it('call api in handleChange', () => {
-        wrapper.instance().handleChange('123', 'test');
-        expect(mockAxios.get).toHaveBeenCalledTimes(2);
-    })
-    it('called api in handleChange with correct url', () => {
-        expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists/123')
+    describe('call api in handleChange', () => {
+        describe("good response", () => {
+
+            mockAxios.get.mockImplementationOnce(() => Promise.resolve(selectedArtist));
+            wrapper.instance().handleChange('123', dispatch);
+
+            it('called api', () => {
+                expect(mockAxios.get).toHaveBeenCalledTimes(2);
+            })
+            it('called api with correct url', () => {
+                expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists/123')
+            })
+        })
+        describe("bad response", () => {
+
+            mockAxios.get.mockImplementationOnce(() => Promise.reject());
+
+            it('called api', () => {
+                expect(mockAxios.get).toHaveBeenCalledTimes(2);
+            })
+            it('called api with correct url', () => {
+                expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists/123')
+            })
+        })
     })
 });
 

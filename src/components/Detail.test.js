@@ -40,7 +40,6 @@ describe('<Detail />', () => {
             expect(wrapper.find('CardMedia').at(0).prop('image')).toEqual("http://www.url.com")
         })
         it('should state correct birthdate and calculates age', () => {
-            console.log(wrapper.find('Typography').at(3).debug())
             expect(wrapper.find('Typography').at(2).text()).toEqual("1 January 1999 (Age: 20)")
         })
         it('should say correct birthplace', () => {
