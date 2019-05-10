@@ -11,7 +11,15 @@ const props = {
             firstName: 'Bob',
             lastName: 'Jones',
             artistID: 123,
-            imageURL: 'http://www.url.com'
+            imageURL: 'http://www.url.com',
+            art: 'Director'
+        },
+        {
+            firstName: 'John',
+            lastName: 'Jones',
+            artistID: 124,
+            imageURL: 'http://www.url1.com',
+            art: 'Director'
         }
     ],
     handleChange: jest.fn(() => {})
@@ -26,13 +34,26 @@ describe('<List />', () => {
         const wrapper = mount(<List data={[]} />);
         expect(wrapper.find('GridList').exists()).toBe(false);
     });
-    it('should render <List> if selection isnt empty', () => {
+    describe('selection isnt empty', () => {
         const wrapper = mount(<List {...props} />);
-        expect(wrapper.find('GridList').exists()).toBe(true);
+        it('should render <List>', () => {
+            expect(wrapper.find('GridList').exists()).toBe(true);
+        })
+        it('should render 2 list items', () => {
+            expect(wrapper.find('GridListTileBar').length).toEqual(2);
+        })
+        it('should render <List>', () => {
+            expect(wrapper.find('img').at(0).prop("src")).toEqual("http://www.url.com")
+        })
+        it('should have correct title', () => {
+            expect(wrapper.find('GridListTileBar').at(0).prop('title')).toEqual("Bob Jones")
+        })
+        it('should have correct subheader', () => {
+            expect(wrapper.find('GridListTileBar').at(0).prop('subtitle')).toEqual("Director")
+        })
+        it('should call handleChange function when click list item', () => {
+            wrapper.find('GridListTile').at(1).simulate('click');
+            expect(props.handleChange.mock.calls.length).toBe(1);
+        })
     });
-    it('should call handleChange function on click', () => {
-        const wrapper = mount(<List {...props} />);
-        wrapper.find('GridListTile').at(1).simulate('click');
-        expect(props.handleChange.mock.calls.length).toBe(1);
-    })
 });
