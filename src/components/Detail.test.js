@@ -11,7 +11,7 @@ const props = {
         lastName: 'Jones',
         art: 'Director',
         imageURL: 'http://www.url.com',
-        dateOfBirth: '1/1/1999',
+        dateOfBirth: '1 January 1999',
         placeOfBirth: 'Jacksonville'
     }
 }
@@ -25,8 +25,23 @@ describe('<Detail />', () => {
         const wrapper = mount(<Detail selection={{}} />);
         expect(wrapper.find('Card').exists()).toBe(false);
     });
-    it('should render <Card> if selection isnt empty', () => {
+    describe('if selection isnt empty', () => {
         const wrapper = mount(<Detail {...props} />);
-        expect(wrapper.find('Card').exists()).toBe(true);
+        it('should render <Card>', () => {
+            expect(wrapper.find('Card').exists()).toBe(true);
+        })
+        it('should have correct title', () => {
+            expect(wrapper.find('CardHeader').at(0).prop('title')).toEqual("Bob Jones")
+        })
+        it('should have correct subheader', () => {
+            expect(wrapper.find('CardHeader').at(0).prop('subheader')).toEqual("Director")
+        })
+        it('should state correct birthdate and calculates age', () => {
+            console.log(wrapper.find('Typography').at(3).debug())
+            expect(wrapper.find('Typography').at(2).text()).toEqual("1 January 1999 (Age: 20)")
+        })
+        it('should say correct birthplace', () => {
+            expect(wrapper.find('Typography').at(3).text()).toEqual("Born in Jacksonville")
+        })
     });
 });

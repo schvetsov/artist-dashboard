@@ -9,19 +9,15 @@ export class GetList extends Component {
 
   constructor(props) {
     super(props);
-    this.fetchList = this.fetchList.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-    this.fetchList(this.props.dispatch);
-  }
-
-  fetchList(dispatch) {
     return axios.get('https://fb-assessment.glitch.me/artists')
-      .then(res => dispatch(updateList(res.data)))
+      .then(res => this.props.dispatch(updateList(res.data)))
       .catch(err => console.log(err))
   }
+
   handleChange(value, dispatch) {
     let route = 'https://fb-assessment.glitch.me/artists/' + value;
     return axios.get(route)
