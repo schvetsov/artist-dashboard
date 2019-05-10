@@ -7,10 +7,11 @@ import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { fakeServer } from 'sinon';
+import mockAxios from 'axios';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock('../__mocks__/handleChange')
+// jest.mock('../__mocks__/handleChange')
 
 // const data = [
 //     {
@@ -40,52 +41,75 @@ const props = {
     dispatch: jest.fn(() => {})
 }
 
-describe('<GetList> no redux', () => {
-    const wrapper = shallow(<GetList />);
-    it('renders', () => {
-        expect(wrapper.exists()).toBe(true);
-    });
-    it('renders List component', () => {
-        expect(wrapper.find(List).exists()).toBe(true);
-    });
-    it('renders Detail component', () => {
-        expect(wrapper.find(Detail).exists()).toBe(true);
-    });
-});
+// describe('<GetList> no redux', () => {
+//     const wrapper = shallow(<GetList />);
+//     it('renders', () => {
+//         expect(wrapper.exists()).toBe(true);
+//     });
+//     it('renders List component', () => {
+//         expect(wrapper.find(List).exists()).toBe(true);
+//     });
+//     it('renders Detail component', () => {
+//         expect(wrapper.find(Detail).exists()).toBe(true);
+//     });
+// });
 
-describe('<GetList> with redux', () => {
+// describe('<GetList> with redux', () => {
 
-    const initialState = {
-        data: [],
-        selection: ''
-    };
-    const mockStore = configureStore()
-    let store, container
+//     const initialState = {
+//         data: [],
+//         selection: ''
+//     };
+//     const mockStore = configureStore()
+//     let store, container
 
-    beforeEach(() => {
-        store = mockStore(initialState)
-        container = mount(<Provider store={store}><ConnectedGetList /></Provider>)
-    })
-    it('render connected component', () => {
-        expect(container.exists()).toBe(true);
-    })
-})
+//     beforeEach(() => {
+//         store = mockStore(initialState)
+//         container = mount(<Provider store={store}><ConnectedGetList /></Provider>)
+//     })
+//     it('render connected component', () => {
+//         expect(container.exists()).toBe(true);
+//     })
+// })
 
 describe('calls fetchList when component mounts', () => {
+    mockAxios.get.mockImplementationOnce(() =>
+        Promise.resolve(selectedArtist)
+    );
+    const spy = jest.spyOn(GetList.prototype, 'fetchList');
+    const wrapper = mount(<GetList {...props} />);
     it('calls fetchList', () => {
-        const spy = jest.spyOn(GetList.prototype, 'fetchList');
-        const wrapper = mount(<GetList {...props} />);
-        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledTimes(1);
+        // expect(spy).toHaveBeenCalled();
+    })
+    it('called api get request', () => {
+        expect(mockAxios.get).toHaveBeenCalledTimes(1);
+    })
+    it('called api with correct url', () => {
+        expect(mockAxios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists')
+    })
+    it('call handleChange', () => {
+        wrapper.instance().handleChange();
+        expect(mockAxios.get).toHaveBeenCalledTimes(2);
+        // return wrapper.instance().handleChange(123, props.dispatch).then(res => {
+        //     expect(res).toEqual(selectedArtist);
+        // })
     })
 })
 
-describe('api call', () => {
-    it('works with promises', () => {
-        const wrapper = mount(<GetList {...props} />);
-        expect.assertions(1);
-        return wrapper.instance().handleChange().then(data => expect(data).toEqual(selectedArtist))
-    })
-})
+// describe('api call', () => {
+//     it("fetches results from google books api", () => {
+//         mockAxios.get.mockImplementationOnce(() =>
+//           Promise.resolve(selectedArtist)
+//         );
+//         let value = "123";
+//         let dispatch = props.dispatch;
+//       return GetList.handleChange(value, dispatch).then(response => {
+//           expect(response).toEqual(selectedArtist);
+//         });
+//       });
+      
+// })
 
 // describe('GetList', () => {
 //     let server;
