@@ -3,6 +3,7 @@
 1. Navigate to [repo](https://github.com/schvetsov/ArtistDashboard)
 ```
 git clone https://github.com/schvetsov/ArtistDashboard.git &&
+cd ArtistDashboard &&
 npm install &&
 npm test &&
 npm start
