@@ -1,39 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import App from './App';
+import App from './components/App';
 import { createStore } from 'redux';
+import reducer from './reducers';
 import { Provider } from 'react-redux';
-
-const initialState = {
-    data: [],
-    selection: ''
-};
-
-function reducer(state = initialState, action) {
-    switch(action.type) {
-        case "LIST":
-            return Object.assign({}, state, {
-                data: action.value
-            })
-        case "PROFILE":
-            return Object.assign({}, state, {
-                selection: action.value
-            })
-        default:
-            return state;
-    }
-}
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const store = createStore(reducer);
 
-const App2 = () => (
-    <Provider store={store}>
-        <App />
-    </Provider>
-)
+const rootElement = document.getElementById('root');
 
-ReactDOM.render(<App2 />, document.getElementById('root'));
+render(
+    <Provider store={store}>
+        <MuiThemeProvider>
+            <App />
+        </MuiThemeProvider>
+    </Provider>,
+    rootElement
+)
 
 serviceWorker.unregister();
