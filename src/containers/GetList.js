@@ -2,27 +2,18 @@ import React, { Component } from 'react';
 import List from '../components/List';
 import Detail from '../components/Detail';
 import { connect } from 'react-redux';
-import { updateList, updateProfile } from '../actions';
-import axios from 'axios';
+import { importList, handleChange } from '../api';
 
 export class GetList extends Component {
 
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
+    this.importList = importList.bind(this);
+    this.handleChange = handleChange.bind(this);
   }
 
   componentDidMount() {
-    return axios.get('https://fb-assessment.glitch.me/artists')
-      .then(res => this.props.dispatch(updateList(res.data)))
-      .catch(err => console.log(err))
-  }
-
-  handleChange(value, dispatch) {
-    let route = 'https://fb-assessment.glitch.me/artists/' + value;
-    return axios.get(route)
-      .then(res => dispatch(updateProfile(res.data)))
-      .catch(err => console.log(err))
+    this.importList(this.props.dispatch)
   }
 
   render() {

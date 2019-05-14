@@ -6,27 +6,42 @@ import Detail from '../components/Detail';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import axios from 'axios';
+// import { importList, handleChange } from '../api';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-jest.mock("axios")
-
-const selectedArtist = {
+const props = {
+    data: [
+        {
+            firstName: 'Bob',
+            lastName: 'Jones',
+            artistID: 123,
+            imageURL: 'http://www.url.com',
+            art: 'Director'
+        },
+        {
+            firstName: 'John',
+            lastName: 'Jones',
+            artistID: 124,
+            imageURL: 'http://www.url1.com',
+            art: 'Director'
+        }
+    ],
     selection: {
         firstName: 'Bob',
         lastName: 'Jones',
         art: 'Director',
         imageURL: 'http://www.url.com',
-        dateOfBirth: '1/1/1999',
+        dateOfBirth: '1 January 1999',
         placeOfBirth: 'Jacksonville'
-    }
+    },
+    handleChange: jest.fn(() => {}),
+    importList: jest.fn(() => {})
 }
-
-const dispatch = jest.fn(() => {})
 
 describe('<GetList> no redux', () => {
 
+    const spy = jest.spyOn(GetList.prototype, 'componentDidMount');
     const wrapper = shallow(<GetList />);
 
     it('renders', () => {
@@ -38,69 +53,9 @@ describe('<GetList> no redux', () => {
     it('renders Detail component', () => {
         expect(wrapper.find(Detail).exists()).toBe(true);
     });
-
-    describe('called api get in componentDidMount', () => {
-
-        describe("good response", () => {
-
-            it('called api', () => {
-                expect(axios.get).toHaveBeenCalledTimes(1);
-            })
-            it('called api with correct url', () => {
-                expect(axios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists')
-            })
-        })
-        describe("bad response", () => {
-    
-            it('called api', () => {
-                expect(axios.get).toHaveBeenCalledTimes(1);
-            })
-            it('called api with correct url', () => {
-                expect(axios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists')
-            })
-        })
+    it('should call componentDidMount when mounted', () => {
+        expect(GetList.prototype.componentDidMount).toHaveBeenCalledTimes(1);
     })
-    describe('call api in handleChange', () => {
-
-        describe("good response", () => {
-
-            it('called api', () => {
-                axios.get.mockImplementationOnce(() => Promise.resolve(selectedArtist));
-                wrapper.instance().handleChange('123', dispatch);
-                expect(axios.get).toHaveBeenCalledTimes(2);
-            })
-            it('called api with correct url', () => {
-                axios.get.mockImplementationOnce(() => Promise.resolve(selectedArtist));
-                wrapper.instance().handleChange('123', dispatch);
-                expect(axios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists/123')
-            })
-            it('received correct response', () => {
-                axios.get.mockImplementationOnce(() => Promise.resolve(selectedArtist));
-                wrapper.instance().handleChange('123', dispatch).then(res => {
-                    expect(res).toEqual(selectedArtist);
-                });
-            })
-        })
-        describe("bad response", () => {
-    
-            it('called api', () => {
-                axios.get.mockImplementationOnce(() => Promise.reject('error'));
-                wrapper.instance().handleChange('123', dispatch);
-                expect(axios.get).toHaveBeenCalledTimes(5);
-            })
-            it('called api with correct url', () => {
-                axios.get.mockImplementationOnce(() => Promise.reject('error'));
-                wrapper.instance().handleChange('123', dispatch);
-                expect(axios.get).toHaveBeenCalledWith('https://fb-assessment.glitch.me/artists/123')
-            })
-             it('received correct response', () => {
-                axios.get.mockImplementationOnce(() => Promise.reject('error'));
-                 wrapper.instance().handleChange('123', dispatch).then(res => {
-                     expect(res).toEqual('error');
-                 });
-             })
-        })
-    });
 });
 
 describe('<GetList> with redux', () => {
