@@ -24,41 +24,54 @@ const styles = theme => ({
   },
 });
 
-const List = (props) => (
-  <div className={props.classes.root}>
-    {Object.keys(props.data).length !== 0 ?
-        <GridList 
-          cellHeight={160} 
-          className={props.classes.gridList}
-          data-test='this-list' >
-          <GridListTile 
-            key="Subheader" 
-            cols={2} 
-            style={{ height: 'auto' }} >
-          </GridListTile>
-          {props.data.map((_,i) => 
+const List = (props) => {
+  const transformedData = () => {
+      const newData = props.data.map((x) => {
+        return "lol"
+      })
+      return(newData)
+  }
+  const mappedData = () => {
+    return(
+      transformedData().map((_,i) => 
+        <GridListTile 
+          key={i}
+          onClick={() => 
+            props.handleChange(props.data[i].id, props.dispatch)
+          } >
+          {/* <img src={props.data[i].imageURL} alt={""} /> */}
+          <GridListTileBar
+            title={props.data[i].name} 
+            subtitle={props.data[i].website}
+            actionIcon={
+              <IconButton className={props.classes.icon}>
+                <InfoIcon />
+              </IconButton>
+            } />
+        </GridListTile>
+      )
+    )
+  }
+  return(
+    <div className={props.classes.root}>
+      {Object.keys(props.data).length !== 0 ?
+          <GridList 
+            cellHeight={160} 
+            className={props.classes.gridList}
+            data-test='this-list' >
             <GridListTile 
-              key={i}
-              onClick={() => 
-                props.handleChange(props.data[i].artistID, props.dispatch)
-              } >
-              <img src={props.data[i].imageURL} alt={""} />
-              <GridListTileBar
-                title={props.data[i].firstName + " " + props.data[i].lastName} 
-                subtitle={props.data[i].art}
-                actionIcon={
-                  <IconButton className={props.classes.icon}>
-                    <InfoIcon />
-                  </IconButton>
-                } />
+              key="Subheader" 
+              cols={2} 
+              style={{ height: 'auto' }} >
             </GridListTile>
-          )}
-        </GridList>
-    :
-      <div></div>
-    }
-  </div>
-)
+            {mappedData()}
+          </GridList>
+      :
+        <div></div>
+      }
+    </div>
+  )
+}
 
 List.propTypes = {
   classes: PropTypes.object.isRequired,

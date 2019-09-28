@@ -25,20 +25,20 @@ const Detail = (props) => (
      {Object.keys(props.selection).length !== 0 ? 
       <Card className={props.classes.card} data-test='this-card'>
         <CardHeader
-          title={props.selection.firstName + " " + props.selection.lastName}
-          subheader={props.selection.art}
+          title={props.selection.name}
+          subheader={props.selection.website}
         />
-        <CardMedia
+        {/* <CardMedia
           className={props.classes.media}
           image={props.selection.imageURL}
           title="Contemplative Reptile"
-        />
+        /> */}
         <CardContent>
           <Typography component="p">
-            {props.selection.dateOfBirth} (Age: {props.selection.firstName && calcAge(props)})
+            {props.selection.phone} {props.selection.username})
           </Typography>
           <Typography component="p">
-            Born in {props.selection.placeOfBirth}
+            {props.selection.email}
           </Typography>
         </CardContent>
       </Card>
